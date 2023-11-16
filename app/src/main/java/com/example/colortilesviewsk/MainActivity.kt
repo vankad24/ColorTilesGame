@@ -44,12 +44,16 @@ class MainActivity : AppCompatActivity() {
 
         for (i in 0..3) {
             changeColor(tiles[coord.x][i])
-            changeColor(tiles[i][coord.x])
+            changeColor(tiles[i][coord.y])
         }
     }
 
     fun checkVictory() {
-        // проверка победы
+        // TODO: проверка победы
+    }
+
+    fun initField() {
+        // TODO: заполнение поля случайными плитками (тёмный/светлый)
     }
 
 
