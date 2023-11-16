@@ -1,25 +1,31 @@
 package com.example.colortilesviewsk
 
+import android.R.attr.x
+import android.R.attr.y
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 
+
 // тип для координат
 data class Coord(val x: Int, val y: Int)
 class MainActivity : AppCompatActivity() {
 
+    lateinit var tiles: Array<Array<View>>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        tiles[0][0] = findViewById(R.id.t00) // TODO: заполнить массив для всех тайлов
+        // еще 15 строк тут, id у плиток нужно по образцу внести в разметку
     }
 
     fun getCoordFromString(s: String): Coord {
         // TODO: реализовать функцию, получающую из
         // строки вида "12" координаты Coord(1,2)
         // TODO: сообщать в лог координаты
-        return Coord(0,0)
+        return Coord(0,0) // вернуть полученные координаты
     }
     fun changeColor(view: View) {
         val brightColor = resources.getColor(R.color.bright)
@@ -32,8 +38,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun onClick(view: View) {
-        changeColor(view)
+    fun onClick(v: View) {
+        val coord = getCoordFromString(v.getTag().toString())
+        changeColor(v)
+
+        for (i in 0..3) {
+            changeColor(tiles[coord.x][i])
+            changeColor(tiles[i][coord.x])
+        }
+    }
+
+    fun checkVictory() {
+        // проверка победы
     }
 
 
